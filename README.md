@@ -11,7 +11,7 @@ Following are all the framework and technologies used:
 
 ## Demo
 
-![asdsa](public/versal.svg)
+![Demo](public/demo.gif)
 
 ## SetUp - Google Project, Enable Drive API, OAuth Client Id
 
