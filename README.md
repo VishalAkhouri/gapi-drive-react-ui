@@ -2,10 +2,11 @@
 
 This project uses ReactJS and Google Drive’s APIs to authenticate and list files hosted on Google Drive. The users are authenticated via OAuth. 
 Following are all the framework and technologies used:
-* NextJS - React Framework
+* [NextJS](https://nextjs.org/) - React Framework
+* Google API Javascript client - [GAPI](https://github.com/google/google-api-javascript-client)
 * Typescript
 * SCSS/SASS - CSS Preprocessor
-* Google API Javascript client - [GAPI](https://github.com/google/google-api-javascript-client)
+* [Material UI](https://material-ui.com/) - Material Design based React Components
 * Unit testing - Jest, Enzyme, React Testing Library
 * End to End testing - Cypress
 
@@ -41,11 +42,11 @@ module.exports = {
 ```
 * Start the dev server - `npm run dev`
 
-## Testing commands
+## Testing
 
 * Run End to End testing (in CI/CD or using command prompt/terminal) - `npm run cypress:run`
 * Run end to End testing (Interactively) - `cypress:open`, and click specific script to run (need to start the server at http://localhost:3000 first)
-* Run Unit test - `npm run test` (these are some setup issues that needs to be fixed - refer details below)
+* Run Unit test - `npm run test` (there are some pending setup issues that needs to be fixed - refer details below pending items section)
 
 ## Debugging some issues
 
