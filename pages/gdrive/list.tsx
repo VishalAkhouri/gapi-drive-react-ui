@@ -3,12 +3,10 @@ import Router from 'next/router'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import TreeView from '@material-ui/lab/TreeView';
 import TreeItem, { TreeItemProps } from '@material-ui/lab/TreeItem';
 import { SvgIconProps } from '@material-ui/core/SvgIcon';
 import Label from '@material-ui/icons/Label';
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import FolderIcon from '@material-ui/icons/Folder';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
@@ -17,6 +15,8 @@ import { isAuth2SignedIn, listFiles } from '../../src/utils/gapi';
 import { useGDriveListStyles, useTreeItemStyles } from './styles';
 import Copyright from '../common/copyright';
 import { IFileList } from '../../src/models/file-list';
+import { GapiMimeType } from '../../src/enums/gapi-mime-type';
+import ButtonAppBar from '../common/header';
 
 declare module 'csstype' {
     interface Properties {
@@ -68,26 +68,26 @@ function StyledTreeItem(props: StyledTreeItemProps) {
 }
 export default function GDriveList() {
     const classes = useGDriveListStyles();
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState<boolean>(true);
+    const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
     const [filesList, setFilesList] = useState<IFileList[]>([])
 
     useEffect(() => {
         if (loading) {
             if (gapi && gapi.auth2) {
-                const isSignedIn = isAuth2SignedIn();
+                const isUserSignedIn = isAuth2SignedIn();
+                setIsSignedIn(isUserSignedIn)
 
-                if (isSignedIn) {
+                if (isUserSignedIn) {
                     listFiles().then(response => {
                         var files = response.result.files;
                         if (files && files.length > 0) {
                             setFilesList(files)
                         }
-                        console.log(filesList);
                         setLoading(false);
                     });
                 }
             } else {
-                console.log('redirect to sign in page')
                 Router.push('/');
             }
         }
@@ -95,6 +95,7 @@ export default function GDriveList() {
 
     return (
         <div className={classes.root}>
+            <ButtonAppBar isSignedIn={isSignedIn}></ButtonAppBar>
             <CssBaseline />
             <Container component="main" className={classes.main} maxWidth="md">
                 <Typography variant="h2" component="h1" gutterBottom>
@@ -104,24 +105,27 @@ export default function GDriveList() {
                     Total files/folders shown: {filesList?.length}
                 </Typography>
                 <Typography variant="body1">
-                    <TreeView
-                        className={classes.root}
-                        defaultExpanded={['3']}
-                        defaultCollapseIcon={<ArrowDropDownIcon />}
-                        defaultExpandIcon={<ArrowRightIcon />}
-                        defaultEndIcon={<div style={{ width: 24 }} />}
-                    >
-                        <StyledTreeItem nodeId="1" labelText="Files and Folders" labelIcon={Label}>
-                            <StyledTreeItem
-                                nodeId={`1`}
-                                labelText='My File'
-                                labelIcon={FileCopyIcon}
-                                labelInfo="90"
-                                color="#1a73e8"
-                                bgColor="#e8f0fe"
-                            />
-                        </StyledTreeItem>
-                    </TreeView>
+                    {filesList.length > 0 &&
+                        <TreeView
+                            className={classes.root}
+                            defaultExpanded={['3']}
+                            defaultCollapseIcon={<ArrowDropDownIcon />}
+                            defaultExpandIcon={<ArrowRightIcon />}
+                            defaultEndIcon={<div style={{ width: 24 }} />}
+                        >
+                            <StyledTreeItem nodeId="3" labelText="Files/Folders" labelIcon={Label}>
+                                {filesList.map((fileData: IFileList, index) => (
+                                    <StyledTreeItem
+                                        nodeId={index}
+                                        labelText={fileData.name}
+                                        labelIcon={fileData.mimeType === GapiMimeType.GDriveFolder ? FolderIcon : FileCopyIcon}
+                                        color="#e3742f"
+                                        bgColor="#fcefe3" />
+                                ))}
+                            </StyledTreeItem>
+                        </TreeView>
+                    }
+                    {filesList.length <= 0 && <div>No Files to display.</div>}
                 </Typography>
             </Container>
             <footer className={classes.footer}>

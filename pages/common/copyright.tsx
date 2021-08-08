@@ -5,7 +5,7 @@ export default function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary">
             {'Copyright © '}
-            <Link color="inherit" href="https://github.com/VishalAkhouri">
+            <Link color="inherit" href="https://github.com/VishalAkhouri/gapi-drive-react-ui">
                 GitHub Repository
             </Link>{' '}
             {new Date().getFullYear()}
