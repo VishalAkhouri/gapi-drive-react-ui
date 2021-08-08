@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "jest"
+    "test": "jest",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "dependencies": {
     "@material-ui/core": "^4.12.3",
@@ -31,6 +33,7 @@
     "@types/jest": "^26.0.24",
     "@types/react": "17.0.16",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
+    "cypress": "^8.2.0",
     "enzyme": "^3.11.0",
     "jest": "^27.0.6",
     "typescript": "4.3.5"
