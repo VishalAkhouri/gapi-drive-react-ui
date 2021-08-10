@@ -19,6 +19,7 @@
     "@types/gapi": "^0.0.41",
     "@types/gapi.auth2": "^0.0.55",
     "@types/gapi.client": "^1.0.5",
+    "@types/gapi.client.drive": "^3.0.13",
     "@types/prop-types": "^15.7.4",
     "enzyme-to-json": "^3.6.2",
     "next": "11.0.1",

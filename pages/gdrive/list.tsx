@@ -12,7 +12,7 @@ import FileCopyIcon from '@material-ui/icons/FileCopy';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import { isAuth2SignedIn, listFiles } from '../../src/utils/gapi';
-import { useGDriveListStyles, useTreeItemStyles } from './styles';
+import { useGDriveListStyles, useTreeItemStyles } from '../../src/styles/gdrive/styles';
 import Copyright from '../common/copyright';
 import { IFileList } from '../../src/models/file-list';
 import { GapiMimeType } from '../../src/enums/gapi-mime-type';
@@ -116,7 +116,7 @@ export default function GDriveList() {
                             <StyledTreeItem nodeId="3" labelText="Files/Folders" labelIcon={Label}>
                                 {filesList.map((fileData: IFileList, index) => (
                                     <StyledTreeItem
-                                        nodeId={index}
+                                        nodeId={'id_'+index}
                                         labelText={fileData.name}
                                         labelIcon={fileData.mimeType === GapiMimeType.GDriveFolder ? FolderIcon : FileCopyIcon}
                                         color="#e3742f"

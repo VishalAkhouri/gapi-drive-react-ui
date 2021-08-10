@@ -4,8 +4,11 @@ import SignInSide from './signin';
 import { handleClientLoad } from '../src/utils/gapi';
 
 export default function Home() {
-  useEffect(async () => {
-    await handleClientLoad();
+  useEffect( () => {
+    const initialiseClient = async () => {
+      await handleClientLoad();
+    };
+    initialiseClient();
   });
 
   return (
@@ -15,7 +18,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <script src="https://apis.google.com/js/api.js" />
       </Head>
-      
+
       <SignInSide></SignInSide>
     </div>
   );

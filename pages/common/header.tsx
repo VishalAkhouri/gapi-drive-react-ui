@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import { FC } from 'react';
 import Router from 'next/router'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -23,7 +23,11 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function ButtonAppBar({ isSignedIn }) {
+interface IButtonAppBarProps {
+  isSignedIn: boolean;
+}
+
+const ButtonAppBar: FC<IButtonAppBarProps> = ({ isSignedIn }) => {
   const classes = useStyles();
 
   const handleLogout = () => {
@@ -48,8 +52,6 @@ export default function ButtonAppBar({ isSignedIn }) {
       </AppBar>
     </div>
   );
-}
-
-ButtonAppBar.propTypes = {
-    isSignedIn: PropTypes.bool.isRequired
 };
+
+export default ButtonAppBar;
