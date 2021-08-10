@@ -42,11 +42,19 @@ module.exports = {
 ```
 * Start the dev server - `npm run dev`
 
+## Linting
+
+* run command `npm run lint`
+
 ## Testing
 
 * Run End to End testing (in CI/CD or using command prompt/terminal) - `npm run cypress:run`
 * Run end to End testing (Interactively) - `cypress:open`, and click specific script to run (need to start the server at http://localhost:3000 first)
-* Run Unit test - `npm run test` (there are some pending setup issues that needs to be fixed - refer details below pending items section)
+* Run Unit test - `npm run test` (there are some pending setup issues that needs to be fixed - refer details below section pending items to be addressed)
+
+## Build
+
+* run command `npm run build`
 
 ## Debugging some issues
 

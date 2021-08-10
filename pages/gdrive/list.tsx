@@ -116,6 +116,7 @@ export default function GDriveList() {
                             <StyledTreeItem nodeId="3" labelText="Files/Folders" labelIcon={Label}>
                                 {filesList.map((fileData: IFileList, index) => (
                                     <StyledTreeItem
+                                        key={index}
                                         nodeId={'id_'+index}
                                         labelText={fileData.name}
                                         labelIcon={fileData.mimeType === GapiMimeType.GDriveFolder ? FolderIcon : FileCopyIcon}
