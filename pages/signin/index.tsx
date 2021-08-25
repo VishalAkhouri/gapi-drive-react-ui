@@ -20,7 +20,7 @@ export default function SignInSide() {
       const isSignedIn = isAuth2SignedIn();
       setIsSignedIn(isSignedIn);
     }
-  });
+  }, []);
 
   const updateSigninStatus = (isSignedIn: boolean) => {
     setIsSignedIn(isSignedIn);
